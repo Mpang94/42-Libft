@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/20 14:02:03 by marvin            #+#    #+#             */
-/*   Updated: 2022/06/20 14:02:03 by marvin           ###   ########.fr       */
+/*   Created: 2022/08/03 15:50:43 by marvin            #+#    #+#             */
+/*   Updated: 2022/08/03 15:50:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include <libft.h>
 
-void    *ft_memset(void *str, int c, size_t n)
+int	ft_atoi(const char *str)
 {
-    size_t  i;
-    unsigned char   *ptr;
+	int	num;
+	int sign;
 
-    i = 0;
-    ptr = (unsigned char *)str;
-    while(i < n)
-    {
-        *ptr = (unsigned char)c;
-        i++;
-        ptr++;
-    }
-    return (str);
+	num = 0;
+	sign = 1;
+	while (*str == ' ' || (*str >= '\t' && *str <= '\r'))
+		*str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str++ == '-')
+			sign = -1;
+	}
+	while (ft_isdigit(*str))
+	{
+		num = (*str - '0') + (num * 10);
+		str++;
+	}
+	return (num * sign);
 }
